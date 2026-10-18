@@ -1,0 +1,149 @@
+Nema problema! 👍🎣 Pomoći ću ti da ubaciš kod za svoju prodavnicu **BLINKERI UNA**.
+
+Već si otvorio stranicu na GitHubu. Sada ćemo uraditi sljedeće na tvom Samsungu.
+
+## 📱 KORAK 1 — Kopiraj kod
+
+**Kod se nalazi ispod ove poruke.** Pritisni dugme za kopiranje koda ako ga vidiš. Zatim se vrati na otvorenu stranicu GitHuba.
+
+Ako si izgubio stranicu, otvori je ponovo ovdje:
+
+👉 [Napravi `index.html` na GitHubu](https://github.com/firduzhalkic1981-oss/blinkeri-una/new/main?filename=index.html&utm_source=chatgpt.com)
+
+## KORAK 2 — Zalijepi ovaj kod
+
+Ovo je jednostavna početna verzija tvoje prodavnice, sa svim četirima modelima i naručivanjem putem WhatsAppa.
+
+```html
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BLINKERI UNA</title>
+<style>
+body{margin:0;font-family:Arial;background:#f2f5ef;color:#173b29}
+header,footer{background:#153c2c;color:white;text-align:center;padding:25px}
+h1{font-size:32px}
+.hero{text-align:center;background:#285b43;color:white;padding:25px 10px}
+main{max-width:900px;margin:auto;padding:15px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+button{padding:12px;border:0;border-radius:7px;background:#17452f;color:white;font-weight:bold}
+nav button{background:#dce8d7;color:#173b29}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.card{background:white;border-radius:10px;padding:16px;border:1px solid #ddd}
+.card h3{margin-top:0}
+.price{font-size:23px;font-weight:bold;margin:12px 0}
+.cart{background:white;margin-top:25px;padding:16px;border-radius:10px}
+input,textarea{display:block;width:100%;padding:12px;margin:8px 0 14px;box-sizing:border-box;border:1px solid #bbb;border-radius:6px;font-size:16px}
+footer a{color:#d6ef9b}
+</style>
+</head>
+<body>
+<header>
+<h1>🎣 BLINKERI UNA</h1>
+Ručno izrađeni metalni blinkeri
+</header>
+<section class="hero">
+<h2>Pravi blinker za pravi ulov!</h2>
+<p>Ručno izrađeno s ljubavlju prema ribolovu.</p>
+<p>Dostava u BiH i inostranstvo.</p>
+</section>
+<main>
+<h2>Naši proizvodi</h2>
+<nav id="filters"></nav>
+<div class="grid" id="products"></div>
+<section class="cart">
+<h2>🛒 Vaša korpa</h2>
+<div id="cart">Korpa je prazna.</div>
+<h2>Ukupno: <span id="total">0</span> KM</h2>
+<h3>Podaci za narudžbu</h3>
+<form id="form">
+<label>Ime i prezime</label>
+<input id="name" required>
+<label>Telefon</label>
+<input id="phone" required>
+<label>Država</label>
+<input id="country" value="Bosna i Hercegovina" required>
+<label>Adresa i grad</label>
+<input id="address" required>
+<label>Napomena</label>
+<textarea id="note"></textarea>
+<button type="button" onclick="order()">📲 Naruči putem WhatsAppa</button>
+</form>
+</section>
+</main>
+<footer>
+<strong>BLINKERI UNA</strong><br>
+WhatsApp: +387 63 799 190<br>
+<a href="mailto:firduzhalkic1981@gmail.com">firduzhalkic1981@gmail.com</a>
+</footer>
+<script>
+const p=[
+["UNA-C","5,5 cm","7 g",10],["UNA-C","5,5 cm","9 g",10],
+["UNA-C","6,5 cm","10 g",12],["UNA-C","6,5 cm","12 g",12],
+["UNA-S","3,5 cm","2 g",6],["UNA-S","3,5 cm","4 g",6],
+["UNA-S","4,5 cm","4 g",6],["UNA-S","4,5 cm","6 g",8],
+["UNA-S","5,5 cm","7 g",8],["UNA-S","5,5 cm","9 g",8],
+["UNA-S","7 cm","10 g",10],["UNA-S","7 cm","12 g",10],
+["UNA-R","6 cm","5 g",8],["UNA-R","6 cm","7 g",8],
+["UNA-R","6 cm","10 g",10],["UNA-R","7,5 cm","8 g",10],
+["UNA-R","7,5 cm","12 g",10],["UNA-R","7,5 cm","15 g",12],
+["UNA-D","4,5 cm","6 g",6],["UNA-D","4,5 cm","10 g",8],
+["UNA-D","6,5 cm","11 g",8],["UNA-D","6,5 cm","14 g",10],
+["UNA-D","6,5 cm","18 g",10],["UNA-D","8,5 cm","12 g",12],
+["UNA-D","8,5 cm","18 g",12],["UNA-D","8,5 cm","23 g",15]
+];
+let cart=[];
+let filter="Svi";
+function draw(){
+document.getElementById("filters").innerHTML="";
+["Svi","UNA-C","UNA-S","UNA-R","UNA-D"].forEach(m=>{
+let b=document.createElement("button");
+b.textContent=m==="Svi"?"Svi modeli":m;
+b.onclick=()=>{filter=m;draw()};
+document.getElementById("filters").appendChild(b);
+});
+let box=document.getElementById("products");box.innerHTML="";
+p.forEach((x,i)=>{
+if(filter!=="Svi"&&x[0]!==filter)return;
+let d=document.createElement("div");d.className="card";
+let h=document.createElement("h3");h.textContent="🎣 "+x[0];
+let detail=document.createElement("p");detail.textContent="Dužina: "+x[1]+" | Težina: "+x[2];
+let price=document.createElement("div");price.className="price";price.textContent=x[3]+" KM";
+let b=document.createElement("button");b.textContent="Dodaj u korpu";b.onclick=()=>{cart.push(i);showCart()};
+d.append(h,detail,price,b);box.appendChild(d);
+});
+}
+function showCart(){
+let box=document.getElementById("cart");box.innerHTML="";
+let total=0;
+if(!cart.length)box.textContent="Korpa je prazna.";
+cart.forEach((i,n)=>{
+let x=p[i];total+=x[3];
+let row=document.createElement("p");
+row.textContent=x[0]+" — "+x[1]+", "+x[2]+" — "+x[3]+" KM ";
+let b=document.createElement("button");b.textContent="Ukloni";
+b.onclick=()=>{cart.splice(n,1);showCart()};
+row.appendChild(b);box.appendChild(row);
+});
+document.getElementById("total").textContent=total;
+}
+function order(){
+if(!cart.length){alert("Prvo dodajte proizvode u korpu.");return}
+if(!document.getElementById("form").reportValidity())return;
+let lines=cart.map(i=>p[i][0]+" "+p[i][1]+" "+p[i][2]+" — "+p[i][3]+" KM");
+let total=cart.reduce((s,i)=>s+p[i][3],0);
+let msg="NARUDŽBA BLINKERI UNA\n\n"+lines.join("\n")+
+"\n\nUkupno: "+total+" KM\n"+
+"Ime: "+name.value+"\nTelefon: "+phone.value+
+"\nDržava: "+country.value+"\nAdresa: "+address.value+
+"\nNapomena: "+note.value+"\nDostava se dogovara naknadno.";
+location.href="https://wa.me/38763799190?text="+encodeURIComponent(msg);
+}
+draw();showCart();
+</script>
+</body>
+</html>
+```
+
