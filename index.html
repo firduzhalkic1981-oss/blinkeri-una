@@ -282,8 +282,16 @@ let h=document.createElement("h3");h.textContent="🎣 "+x[0];
 let detail=document.createElement("p");detail.textContent="Dužina: "+x[1]+" | Težina: "+x[2];
 let price=document.createElement("div");price.className="price";price.textContent=x[3]+" KM";
 let b=document.createElement("button");b.textContent="Dodaj u korpu";b.onclick=()=>{cart.push(i);showCart()};
-d.append(h,detail,price,b);box.appendChild(d);
-});
+
+if(x[0]==="UNA-C"){
+let photo=document.createElement("img");
+photo.src="20250427_085306.jpg";
+photo.alt="UNA-C ručno izrađeni blinker";
+photo.loading="lazy";
+photo.style.cssText="width:100%;height:190px;object-fit:contain;border-radius:8px;background:#e6ece7";
+d.appendChild(photo);
+}
+d.append(h,detail,price,b);box.appendChild(d)
 }
 function showCart(){
 let box=document.getElementById("cart");box.innerHTML="";
