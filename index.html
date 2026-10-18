@@ -289,11 +289,12 @@ photo.src="20250427_085306.jpg";
 photo.alt="UNA-C ručno izrađeni blinker";
 photo.loading="lazy";
 photo.style.cssText="width:100%;height:190px;object-fit:contain;border-radius:8px;background:#e6ece7";
-d.appendChild(photo);
+
+d.append(h,detail,price,b);
+box.appendChild(d);
+});
 }
-document.getElementById("total").textContent=total;
-}
-function order(){
+function showCart(){  
 if(!cart.length){alert("Prvo dodajte proizvode u korpu.");return}
 if(!document.getElementById("form").reportValidity())return;
 let lines=cart.map(i=>p[i][0]+" "+p[i][1]+" "+p[i][2]+" — "+p[i][3]+" KM");
