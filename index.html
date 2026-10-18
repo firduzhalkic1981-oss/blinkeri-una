@@ -291,20 +291,6 @@ photo.loading="lazy";
 photo.style.cssText="width:100%;height:190px;object-fit:contain;border-radius:8px;background:#e6ece7";
 d.appendChild(photo);
 }
-d.append(h,detail,price,b);box.appendChild(d)
-}
-function showCart(){
-let box=document.getElementById("cart");box.innerHTML="";
-let total=0;
-if(!cart.length)box.textContent="Korpa je prazna.";
-cart.forEach((i,n)=>{
-let x=p[i];total+=x[3];
-let row=document.createElement("p");
-row.textContent=x[0]+" — "+x[1]+", "+x[2]+" — "+x[3]+" KM ";
-let b=document.createElement("button");b.textContent="Ukloni";
-b.onclick=()=>{cart.splice(n,1);showCart()};
-row.appendChild(b);box.appendChild(row);
-});
 document.getElementById("total").textContent=total;
 }
 function order(){
