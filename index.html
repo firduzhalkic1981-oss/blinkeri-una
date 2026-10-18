@@ -5,21 +5,251 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BLINKERI UNA</title>
 <style>
-body{margin:0;font-family:Arial;background:#f2f5ef;color:#173b29}
-header,footer{background:#153c2c;color:white;text-align:center;padding:25px}
-h1{font-size:32px}
-.hero{text-align:center;background:#285b43;color:white;padding:25px 10px}
-main{max-width:900px;margin:auto;padding:15px}
-nav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
-button{padding:12px;border:0;border-radius:7px;background:#17452f;color:white;font-weight:bold}
-nav button{background:#dce8d7;color:#173b29}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
-.card{background:white;border-radius:10px;padding:16px;border:1px solid #ddd}
-.card h3{margin-top:0}
-.price{font-size:23px;font-weight:bold;margin:12px 0}
-.cart{background:white;margin-top:25px;padding:16px;border-radius:10px}
-input,textarea{display:block;width:100%;padding:12px;margin:8px 0 14px;box-sizing:border-box;border:1px solid #bbb;border-radius:6px;font-size:16px}
-footer a{color:#d6ef9b}
+Odlično! 🎣 Napravit ćemo da **BLINKERI UNA** izgleda kao profesionalna prodavnica ribolovnih varalica, prilagođena kupcima u BiH i inostranstvu.
+
+Zadržat ćemo tvoje proizvode, cijene i WhatsApp naručivanje. Promijenit ćemo samo izgled stranice.
+
+## 🎣 Ovako ćemo urediti prodavnicu
+
+- 🌲 Tamnozelena pozadina i srebrni detalji.
+- 🐟 Elegantan naslov **BLINKERI UNA**.
+- ✨ Ljepše kartice za modele UNA-C, UNA-S, UNA-R i UNA-D.
+- 💰 Jasno istaknute cijene.
+- 🛒 Preglednija korpa za kupovinu.
+- 📱 Dizajn prilagođen Samsungu i drugim telefonima.
+
+## 📱 KORAK 1 — Otvori kod svoje prodavnice
+
+Na svom Samsungu pritisni ovaj link:
+
+👉 **[Uredi BLINKERI UNA](https://github.com/firduzhalkic1981-oss/blinkeri-una/edit/main/index.html?utm_source=chatgpt.com)**
+
+Otvorit će se kod tvoje internet prodavnice.
+
+## KORAK 2 — Pronađi dio za izgled stranice
+
+U kodu pronađi red:
+
+`<style>`
+
+Ispod njega nalazi se dio koda koji određuje boje i izgled prodavnice.
+
+Taj dio završava redom:
+
+`</style>`
+
+**Važno:** Obrisat ćemo samo sadržaj između tih oznaka i zamijeniti ga novim dizajnom. Nemoj brisati same oznake `<style>` i `</style>` niti ostatak stranice.
+
+## KORAK 3 — Zalijepi novi dizajn
+
+Kopiraj ovaj kod:
+
+```css
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #10271e;
+  color: #f2f5f2;
+}
+
+header {
+  background: linear-gradient(135deg, #071b13, #20513a);
+  color: white;
+  text-align: center;
+  padding: 32px 14px;
+  border-bottom: 3px solid #aebbc0;
+}
+
+header h1 {
+  font-size: clamp(30px, 7vw, 46px);
+  margin: 0;
+  letter-spacing: 3px;
+  text-shadow: 0 3px 12px #0008;
+}
+
+header p {
+  color: #d5e0da;
+  font-size: 16px;
+}
+
+.hero {
+  text-align: center;
+  padding: 38px 16px;
+  background: linear-gradient(135deg, #173e2c, #397653);
+  border-bottom: 1px solid #789687;
+}
+
+.hero h2 {
+  font-size: clamp(24px, 5vw, 34px);
+  color: white;
+}
+
+.hero p {
+  line-height: 1.7;
+  color: #e0e9e3;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 22px 15px;
+}
+
+main h2 {
+  color: #d5e0e4;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 22px 0;
+}
+
+button {
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+button:hover {
+  filter: brightness(1.12);
+}
+
+nav button {
+  padding: 11px 16px;
+  border: 1px solid #aebbc0;
+  border-radius: 22px;
+  background: #e1e8e9;
+  color: #153b2a;
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(220px, 1fr)
+  );
+  gap: 18px;
+}
+
+.card {
+  background: #f5f7f4;
+  color: #183729;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #aebbc0;
+  box-shadow: 0 5px 18px #0003;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #17452f;
+  font-size: 22px;
+}
+
+.card p {
+  line-height: 1.6;
+}
+
+.price {
+  font-size: 27px;
+  font-weight: bold;
+  margin: 15px 0;
+  color: #17452f;
+}
+
+.card button {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 8px;
+  background: #17452f;
+  color: white;
+  font-weight: bold;
+}
+
+.cart {
+  background: #f5f7f4;
+  color: #183729;
+  margin-top: 32px;
+  padding: 20px;
+  border-radius: 14px;
+  border: 2px solid #aebbc0;
+  box-shadow: 0 5px 18px #0003;
+}
+
+.cart h2,
+.cart h3 {
+  color: #17452f;
+}
+
+.cart button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #17452f;
+  color: white;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0 15px;
+  box-sizing: border-box;
+  border: 1px solid #aebbc0;
+  border-radius: 7px;
+  font-size: 16px;
+  background: white;
+  color: #183729;
+}
+
+.cart form > button {
+  padding: 14px;
+  margin-top: 8px;
+  width: 100%;
+  background: #168447;
+  color: white;
+  font-weight: bold;
+}
+
+footer {
+  background: #071b13;
+  color: #e3ebe5;
+  text-align: center;
+  padding: 30px 14px;
+  line-height: 2;
+  border-top: 3px solid #aebbc0;
+}
+
+footer a {
+  color: #d5e0e4;
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 25px 10px;
+  }
+
+  main {
+    padding: 16px 12px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cart {
+    padding: 14px;
+  }
+}
 </style>
 </head>
 <body>
