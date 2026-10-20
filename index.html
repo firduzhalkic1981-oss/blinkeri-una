@@ -358,6 +358,13 @@ let msg="NARUDŽBA BLINKERI UNA\n\n"+lines.join("\n")+
 "\n\nUkupno: "+total+" KM\n"+
 "Ime: "+name.value+"\nTelefon: "+phone.value+
 "\nDržava: "+country.value+"\nAdresa: "+address.value+
+
+
+"\nDržava: "+country.value+"\nAdresa: "+address.value+
+"\nPoštanski broj: "+document.getElementById("postal").value+
+
+
+  
 "\nNapomena: "+note.value+"\nDostava se dogovara naknadno.";
 location.href="https://wa.me/38763799190?text="+encodeURIComponent(msg);
 }
