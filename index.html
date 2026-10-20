@@ -302,7 +302,19 @@ let h=document.createElement("h3");h.textContent="🎣 "+x[0];
 let detail=document.createElement("p");detail.textContent="Dužina: "+x[1]+" | Težina: "+x[2];
 let price=document.createElement("div");price.className="price";price.textContent=x[3]+" KM";
 let b=document.createElement("button");b.textContent="Dodaj u korpu";b.onclick=()=>{cart.push(i);showCart()};
-d.append(h,detail,price,b);box.appendChild(d);
+
+  
+  
+  
+let photos={"UNA-C":"20250427_085306.jpg","UNA-S":"FB_IMG_1736928430223.jpg","UNA-R":"20260201_192714.jpg","UNA-D":"20260923_192011.jpg"};
+let img=document.createElement("img");
+img.src=photos[x[0]];
+img.alt=x[0];
+img.style.cssText="width:100%;height:180px;object-fit:contain";
+d.appendChild(img);
+  
+  
+  d.append(h,detail,price,b);box.appendChild(d);
 });
 }
 function showCart(){
