@@ -347,77 +347,50 @@ let photos=
 
   
 const galerije = {
-"UNA-C": [
-"20250529_062753.jpg",
-"20250529_063210.jpg",
-"20250529_063535.jpg",
-"20250529_063635.jpg",
-"20251129_211355.jpg"
-],
-"UNA-S": ["FB_IMG_1736928430223.jpg"],
-"UNA-R": ["20260201_192714.jpg"],
-"UNA-D": ["20260923_192011.jpg"]
+
+
+
+
+
+
+  Odlično! ❤️🎣 Sada ćemo vratiti prikaz proizvoda u prodavnici BLINKERI UNA.
+
+### 📱 KORAK 3 — Zamijeni kod galerije
+
+**1.** Pronađi početak ovog dijela:
+
+```javascript
+const galerije = {
+
+let photos = {
+"UNA-C": "20250529_062753.jpg",
+"UNA-S": "FB_IMG_1736928430223.jpg",
+"UNA-R": "20260201_192714.jpg",
+"UNA-D": "20260923_192011.jpg"
 };
 
-let slike = galerije[x[0]] || [];
-let index = 0;
+let img = document.createElement("img");
+img.src = photos[x[0]];
+img.alt = x[0];
+img.style.cssText = "width:100%;height:180px;object-fit:contain";
+d.appendChild(img);
 
-let okvir = document.createElement("div");
-okvir.style.cssText = "text-align:center;width:100%;";
+if (x[0] === "UNA-C") {
+    let dodatneSlike = [
+        "20250529_063210.jpg",
+        "20250529_063535.jpg",
+        "20250529_063635.jpg",
+        "20251129_211355.jpg"
+    ];
 
-let slika = document.createElement("img");
-slika.style.cssText = "width:100%;height:240px;object-fit:contain;border-radius:12px;";
-
-function prikaziSliku(){
-slika.src = slike[index];
-slika.alt = x[0] + " - dekor " + (index+1);
-}
-
-prikaziSliku();
-okvir.appendChild(slika);
-
-if(slike.length > 1){
-
-let kontrole = document.createElement("div");
-kontrole.style.cssText = "display:flex;justify-content:center;align-items:center;gap:15px;margin:10px;";
-
-let lijevo = document.createElement("button");
-lijevo.type = "button";
-lijevo.textContent = "❮";
-
-let broj = document.createElement("span");
-
-let desno = document.createElement("button");
-desno.type = "button";
-desno.textContent = "❯";
-
-function osvjezi(){
-prikaziSliku();
-broj.textContent = (index+1) + " / " + slike.length;
-}
-
-lijevo.onclick = function(){
-index = (index-1+slike.length)%slike.length;
-osvjezi();
-};
-
-desno.onclick = function(){
-index = (index+1)%slike.length;
-osvjezi();
-};
-
-osvjezi();
-
-kontrole.append(lijevo,broj,desno);
-okvir.appendChild(kontrole);
-}
-
-d.appendChild(okvir);
-
-
-
-
-  
+    dodatneSlike.forEach(function(naziv) {
+        let dodatna = document.createElement("img");
+        dodatna.src = naziv;
+        dodatna.alt = "UNA-C";
+        dodatna.style.cssText =
+            "width:100%;height:180px;object-fit:contain";
+        d.appendChild(dodatna);
+    });
 }
 
 
