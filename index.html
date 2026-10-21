@@ -347,6 +347,7 @@ let b=document.createElement("button");b.textContent="Dodaj u korpu";b.onclick=(
 
 
 
+
 let photos = {
 "UNA-C": "20250529_062753.jpg",
 "UNA-S": "FB_IMG_1736928430223.jpg",
@@ -354,32 +355,69 @@ let photos = {
 "UNA-D": "20260923_192011.jpg"
 };
 
-let img = document.createElement("img");
-img.src = photos[x[0]];
-img.alt = x[0];
-img.style.cssText = "width:100%;height:180px;object-fit:contain";
-d.appendChild(img);
+let slike = [photos[x[0]]];
 
 if (x[0] === "UNA-C") {
-    let dodatneSlike = [
+    slike = [
+        "20250529_062753.jpg",
         "20250529_063210.jpg",
         "20250529_063535.jpg",
         "20250529_063635.jpg",
         "20251129_211355.jpg"
     ];
-
-    dodatneSlike.forEach(function(naziv) {
-        let dodatna = document.createElement("img");
-        dodatna.src = naziv;
-        dodatna.alt = "UNA-C";
-        dodatna.style.cssText =
-            "width:100%;height:180px;object-fit:contain";
-        d.appendChild(dodatna);
-    });
 }
 
+let indeks = 0;
 
-  
+let galerija = document.createElement("div");
+galerija.style.cssText = "width:100%;text-align:center;";
+
+let img = document.createElement("img");
+img.src = slike[0];
+img.alt = x[0];
+img.style.cssText =
+    "width:100%;height:220px;object-fit:contain;";
+
+galerija.appendChild(img);
+
+if (slike.length > 1) {
+    let kontrole = document.createElement("div");
+    kontrole.style.cssText =
+        "display:flex;justify-content:center;align-items:center;gap:18px;margin:12px;";
+
+    let lijevo = document.createElement("button");
+    lijevo.type = "button";
+    lijevo.textContent = "❮";
+
+    let broj = document.createElement("span");
+    broj.textContent = "1 / " + slike.length;
+
+    let desno = document.createElement("button");
+    desno.type = "button";
+    desno.textContent = "❯";
+
+    function osvjeziGaleriju() {
+        img.src = slike[indeks];
+        broj.textContent =
+            (indeks + 1) + " / " + slike.length;
+    }
+
+    lijevo.onclick = function() {
+        indeks = (indeks - 1 + slike.length) % slike.length;
+        osvjeziGaleriju();
+    };
+
+    desno.onclick = function() {
+        indeks = (indeks + 1) % slike.length;
+        osvjeziGaleriju();
+    };
+
+    kontrole.append(lijevo, broj, desno);
+    galerija.appendChild(kontrole);
+}
+
+d.appendChild(galerija);
+
   
   d.append(h,detail,price,b);box.appendChild(d);
 });
