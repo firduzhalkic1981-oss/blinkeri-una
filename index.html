@@ -340,50 +340,80 @@ let b=document.createElement("button");b.textContent="Dodaj u korpu";b.onclick=(
   
   
   
-let photos={"UNA-C":"20250529_062753.jpg","UNA-S":"FB_IMG_1736928430223.jpg","UNA-R":"20260201_192714.jpg","UNA-D":"20260923_192011.jpg"};
-let img=document.createElement("img");
-img.src=photos[x[0]];
-img.alt=x[0];
-img.style.cssText="width:100%;height:180px;object-fit:contain";
-d.appendChild(img);
+let photos=
 
 
-
-
-
-if(x[0]==="UNA-C"){
-let img2=document.createElement("img");
-img2.src="20250529_063210.jpg";
-img2.alt="UNA-C - drugi dekor";
-img2.style.cssText="width:100%;height:180px;object-fit:contain";
-d.appendChild(img2);
 
 
   
-if(x[0]==="UNA-C"){
-let img3=document.createElement("img");
-img3.src="20250529_063535.jpg";
-img3.alt="UNA-C - treći dekor";
-img3.style.cssText="width:100%;height:180px;object-fit:contain";
-d.appendChild(img3);
+const galerije = {
+"UNA-C": [
+"20250529_062753.jpg",
+"20250529_063210.jpg",
+"20250529_063535.jpg",
+"20250529_063635.jpg",
+"20251129_211355.jpg"
+],
+"UNA-S": ["FB_IMG_1736928430223.jpg"],
+"UNA-R": ["20260201_192714.jpg"],
+"UNA-D": ["20260923_192011.jpg"]
+};
+
+let slike = galerije[x[0]] || [];
+let index = 0;
+
+let okvir = document.createElement("div");
+okvir.style.cssText = "text-align:center;width:100%;";
+
+let slika = document.createElement("img");
+slika.style.cssText = "width:100%;height:240px;object-fit:contain;border-radius:12px;";
+
+function prikaziSliku(){
+slika.src = slike[index];
+slika.alt = x[0] + " - dekor " + (index+1);
 }
 
+prikaziSliku();
+okvir.appendChild(slika);
 
-let img4=document.createElement("img");
-img4.src="20250529_063635.jpg";
-img4.alt="UNA-C - četvrti dekor";
-img4.style.cssText="width:100%;height:180px;object-fit:contain";
-d.appendChild(img4);
+if(slike.length > 1){
 
+let kontrole = document.createElement("div");
+kontrole.style.cssText = "display:flex;justify-content:center;align-items:center;gap:15px;margin:10px;";
 
+let lijevo = document.createElement("button");
+lijevo.type = "button";
+lijevo.textContent = "❮";
 
+let broj = document.createElement("span");
 
+let desno = document.createElement("button");
+desno.type = "button";
+desno.textContent = "❯";
 
-let img5=document.createElement("img");
-img5.src="20251129_211355.jpg";
-img5.alt="UNA-C - peti dekor";
-img5.style.cssText="width:100%;height:180px;object-fit:contain";
-d.appendChild(img5);
+function osvjezi(){
+prikaziSliku();
+broj.textContent = (index+1) + " / " + slike.length;
+}
+
+lijevo.onclick = function(){
+index = (index-1+slike.length)%slike.length;
+osvjezi();
+};
+
+desno.onclick = function(){
+index = (index+1)%slike.length;
+osvjezi();
+};
+
+osvjezi();
+
+kontrole.append(lijevo,broj,desno);
+okvir.appendChild(kontrole);
+}
+
+d.appendChild(okvir);
+
 
 
 
