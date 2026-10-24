@@ -618,23 +618,40 @@ row.appendChild(b);box.appendChild(row);
 document.getElementById("total").textContent=total;
 }
 function order(){
-if(!cart.length){alert("Prvo dodajte proizvode u korpu.");return}
-if(!document.getElementById("form").reportValidity())return;
-let lines=cart.map(i=>p[i][0]+" "+p[i][1]+" "+p[i][2]+" — "+p[i][3]+" KM");
-let total=cart.reduce((s,i)=>s+p[i][3],0);
-let msg="NARUDŽBA BLINKERI UNA\n\n"+lines.join("\n")+
-"\n\nUkupno: "+total+" KM\n"+
-"Ime: "+name.value+"\nTelefon: "+phone.value+
-"\nDržava: "+country.value+"\nAdresa: "+address.value+
 
 
-"\nDržava: "+country.value+"\nAdresa: "+address.value+
-"\nPoštanski broj: "+document.getElementById("postal").value+
 
+if (!cart.length) {
+    alert("Prvo dodajte proizvode u korpu.");
+    return;
+}
 
-  
-"\nNapomena: "+note.value+"\nDostava se dogovara naknadno.";
-location.href="https://wa.me/38763799190?text="+encodeURIComponent(msg);
+if (!document.getElementById("form").reportValidity()) return;
+
+let lines = cart.map(i =>
+    p[i][0] + " " + p[i][1] + " " +
+    p[i][2] + " — " + p[i][3] + " KM"
+);
+
+let total = cart.reduce((s, i) => s + p[i][3], 0);
+
+let msg =
+    "🎣 NARUDŽBA BLINKERI UNA\n\n" +
+    lines.join("\n") +
+    "\n\n💰 Ukupno: " + total + " KM\n" +
+    "Ime: " + name.value +
+    "\nTelefon: " + phone.value +
+    "\nDržava: " + country.value +
+    "\nAdresa: " + address.value +
+    "\nPoštanski broj: " +
+    document.getElementById("postal").value +
+    "\nNapomena: " + note.value +
+    "\n\nDostava i plaćanje po dogovoru.";
+
+location.href =
+    "https://wa.me/38763799190?text=" +
+    encodeURIComponent(msg);
+
 }
 draw();showCart();
 </script>
