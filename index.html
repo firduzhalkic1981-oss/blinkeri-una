@@ -226,6 +226,57 @@ footer a {
 }
 
 
+
+
+.una-banner {
+ display:grid;
+ grid-template-columns:1fr 45%;
+ background:#09291d;
+ color:white;
+ min-height:370px;
+}
+
+.una-banner-tekst {
+ padding:55px 25px;
+ text-align:center;
+ align-content:center;
+}
+
+.una-banner-tekst h2 {
+ font-size:clamp(32px,6vw,55px);
+ color:white;
+}
+
+.una-banner-tekst p {
+ font-size:20px;
+}
+
+.una-banner-slika {
+ background:url("20261014_100132.jpg")
+ center/cover no-repeat;
+ min-height:370px;
+}
+
+.una-banner a {
+ display:inline-block;
+ background:#168447;
+ color:white;
+ padding:15px 25px;
+ border-radius:10px;
+ text-decoration:none;
+ font-weight:bold;
+}
+
+@media(max-width:600px){
+ .una-banner {
+  grid-template-columns:1fr;
+ }
+ .una-banner-slika {
+  min-height:320px;
+ }
+}
+
+  
 </style>
 </head>
 <body>
@@ -233,6 +284,26 @@ footer a {
 <h1>🎣 BLINKERI UNA</h1>
 Ručno izrađeni metalni blinkeri
 </header>
+
+<section class="una-banner">
+
+  <div class="una-banner-tekst">
+    <h2>🎣 BLINKERI UNA</h2>
+
+    <p>Iz ljubavi prema ribolovu!</p>
+
+    <p>Ručno izrađeni blinkeri inspirisani rijekom Unom.</p>
+
+    <a href="#products">
+      POGLEDAJ PROIZVODE
+    </a>
+  </div>
+
+  <div class="una-banner-slika"></div>
+
+</section>
+
+  
 <section class="hero">
 <h2>Pravi blinker za pravi ulov!</h2>
 <p>Ručno izrađeno s ljubavlju prema ribolovu.</p>
