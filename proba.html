@@ -395,3 +395,277 @@ function draw(){
 document.getElementById("filters").innerHTML="";
 ["Svi","UNA-C","UNA-S","UNA-R","UNA-D"].forEach(m=>{
 let b=document.createElement(
+"button");
+b.textContent=m==="Svi"?"Svi modeli":m;
+b.onclick=()=>{filter=m;draw()};
+document.getElementById("filters").appendChild(b);
+});
+
+const glavne={
+"UNA-C":"20250529_062753.jpg",
+"UNA-S":"FB_IMG_1736928430223.jpg",
+"UNA-R":"20260201_192714.jpg",
+"UNA-D":"20260923_192011.jpg"
+};
+
+const galerije={
+"UNA-C":[
+"20250529_062753.jpg",
+"20250529_063210.jpg",
+"20250529_063535.jpg",
+"20250529_063635.jpg",
+"20251129_211355.jpg"
+],
+
+"UNA-S|3,5 cm":[
+"20240613_203035.jpg",
+"20240613_203203.jpg",
+"20240613_204020.jpg",
+"20240613_204233.jpg",
+"20250204_114757.jpg",
+"20250204_114930.jpg",
+"20250204_115048.jpg",
+"20250204_115158.jpg",
+"20250204_115446.jpg",
+"20250204_115646.jpg",
+"20250204_115733.jpg",
+"20250204_120103.jpg"
+],
+
+"UNA-S|4,5 cm":[
+"20230210_142502.jpg",
+"20230708_215645.jpg",
+"20230708_215720.jpg",
+"20230708_215749.jpg",
+"20230708_215814.jpg",
+"20230708_215926.jpg",
+"20230708_215959.jpg",
+"20230708_220022.jpg",
+"20230708_220110.jpg",
+"20230708_220204.jpg",
+"20230708_220246.jpg",
+"20230708_220357.jpg",
+"20230708_220557.jpg",
+"20230708_220633.jpg",
+"20230708_220826.jpg"
+],
+
+"UNA-S|5,5 cm":[
+"20230429_103929.jpg",
+"20230429_104001.jpg",
+"20230429_104046.jpg",
+"20230429_104108.jpg",
+"20230429_104216.jpg",
+"20230429_104236.jpg",
+"20240223_211227.jpg",
+"20240223_211248.jpg",
+"20240223_211318.jpg",
+"20240223_211355.jpg",
+"20251129_210350.jpg",
+"20251129_210421.jpg"
+],
+
+"UNA-S|7 cm":[
+"20230504_054209.jpg",
+"20230504_054230.jpg",
+"20230504_054245.jpg",
+"20230504_054310.jpg",
+"20230504_054332.jpg",
+"20230504_054400.jpg",
+"20230504_054426.jpg",
+"20230504_054614.jpg",
+"20230504_054632.jpg",
+"20230504_054729.jpg",
+"20230504_054810.jpg"
+]
+};
+
+let box=document.getElementById("products");
+box.innerHTML="";
+
+p.forEach((x,i)=>{
+
+if(filter!=="Svi"&&x[0]!==filter)return;
+
+let slike=galerije[x[0]+"|"+x[1]]
+||galerije[x[0]]
+||[glavne[x[0]]];
+
+let indeks=0;
+
+let d=document.createElement("div");
+d.className="card";
+
+let h=document.createElement("h3");
+h.textContent="🎣 "+x[0];
+
+let galerija=document.createElement("div");
+galerija.style.cssText=
+"position:relative;text-align:center;";
+
+let img=document.createElement("img");
+img.style.cssText=
+"width:100%;height:220px;object-fit:contain;";
+
+let oznaka=document.createElement("span");
+oznaka.style.cssText=
+"position:absolute;top:8px;right:8px;background:#145c38;color:white;padding:7px;border-radius:8px;font-weight:bold;pointer-events:none;";
+
+function osvjezi(){
+img.onerror=function(){
+img.onerror=null;
+img.src=glavne[x[0]];
+};
+img.src=slike[indeks];
+img.alt=x[0]+" dekor "+(indeks+1);
+oznaka.textContent="DEKOR BR. "+(indeks+1);
+}
+
+galerija.append(img,oznaka);
+
+let kontrole=document.createElement("div");
+kontrole.style.cssText=
+"display:flex;justify-content:center;gap:15px;margin:12px;align-items:center;";
+
+if(slike.length>1){
+
+let lijevo=document.createElement("button");
+lijevo.textContent="❮";
+
+let broj=document.createElement("span");
+broj.textContent="1 / "+slike.length;
+
+let desno=document.createElement("button");
+desno.textContent="❯";
+
+function promijeni(){
+osvjezi();
+broj.textContent=(indeks+1)+" / "+slike.length;
+}
+
+lijevo.onclick=()=>{
+indeks=(indeks-1+slike.length)%slike.length;
+promijeni();
+};
+
+desno.onclick=()=>{
+indeks=(indeks+1)%slike.length;
+promijeni();
+};
+
+kontrole.append(lijevo,broj,desno);
+}
+
+osvjezi();
+
+let detail=document.createElement("p");
+detail.textContent=
+"Dužina: "+x[1]+" | Težina: "+x[2];
+
+let price=document.createElement("div");
+price.className="price";
+price.textContent=x[3]+" KM";
+
+let dodaj=document.createElement("button");
+dodaj.textContent="🛒 Dodaj u korpu";
+
+dodaj.onclick=()=>{
+cart.push({i:i,dekor:indeks+1});
+showCart();
+};
+
+d.append(h,galerija,kontrole,detail,price,dodaj);
+box.appendChild(d);
+
+});
+}
+
+function showCart(){
+
+let box=document.getElementById("cart");
+box.innerHTML="";
+
+let total=0;
+
+if(!cart.length){
+box.textContent="Korpa je prazna.";
+}
+
+cart.forEach((item,n)=>{
+
+let x=p[item.i];
+total+=x[3];
+
+let row=document.createElement("p");
+
+row.textContent=
+x[0]+" — "+x[1]+" — "+x[2]+
+" — DEKOR BR. "+item.dekor+
+" — "+x[3]+" KM ";
+
+let b=document.createElement("button");
+b.textContent="Ukloni";
+
+b.onclick=()=>{
+cart.splice(n,1);
+showCart();
+};
+
+row.appendChild(b);
+box.appendChild(row);
+
+});
+
+document.getElementById("total").textContent=total;
+}
+
+function order(){
+
+if(!cart.length){
+alert("Prvo dodajte proizvode u korpu.");
+return;
+}
+
+let form=document.getElementById("form");
+
+if(!form.reportValidity())return;
+
+let value=id=>
+document.getElementById(id).value.trim();
+
+let stavke=cart.map(item=>{
+let x=p[item.i];
+
+return x[0]+" — "+x[1]+" — "+x[2]+
+" — DEKOR BR. "+item.dekor+
+" — "+x[3]+" KM";
+});
+
+let total=cart.reduce(
+(s,item)=>s+p[item.i][3],0
+);
+
+let poruka=
+"🎣 NARUDŽBA BLINKERI UNA\n\n"+
+stavke.join("\n")+
+"\n\nUkupno: "+total+" KM"+
+"\nIme i prezime: "+value("name")+
+"\nTelefon: "+value("phone")+
+"\nDržava: "+value("country")+
+"\nAdresa i grad: "+value("address")+
+"\nPoštanski broj: "+value("postal")+
+"\nNapomena: "+(value("note")||"Nema")+
+"\n\nPoštarina i plaćanje po dogovoru.";
+
+window.location.href=
+"https://wa.me/38763799190?text="+
+encodeURIComponent(poruka);
+}
+
+draw();
+showCart();
+
+</script>
+</body>
+</html>
+
