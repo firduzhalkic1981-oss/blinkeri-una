@@ -666,6 +666,41 @@ draw();
 showCart();
 
 </script>
+
+
+<script>
+document.getElementById("products").addEventListener("click",function(e){
+
+if(e.target.tagName!=="IMG")return;
+
+let pregled=document.createElement("div");
+
+pregled.style.cssText=
+"position:fixed;inset:0;background:#000e;z-index:9999;display:flex;align-items:center;justify-content:center;padding:15px;";
+
+let velika=document.createElement("img");
+velika.src=e.target.src;
+velika.style.cssText=
+"max-width:95vw;max-height:85vh;object-fit:contain;";
+
+let zatvori=document.createElement("button");
+zatvori.textContent="✕";
+zatvori.style.cssText=
+"position:absolute;top:15px;right:15px;font-size:25px;padding:10px 18px;background:white;color:black;border:0;border-radius:8px;";
+
+zatvori.onclick=()=>pregled.remove();
+
+pregled.onclick=function(e){
+if(e.target===pregled)pregled.remove();
+};
+
+pregled.append(velika,zatvori);
+document.body.appendChild(pregled);
+
+});
+</script>
+
+  
 </body>
 </html>
 
