@@ -700,7 +700,32 @@ document.body.appendChild(pregled);
 });
 </script>
 
-  
+ 
+<script>
+document.addEventListener("click",function(e){
+if(!e.target.matches("#products img"))return;
+
+let okvir=document.createElement("div");
+okvir.style.cssText="position:fixed;inset:0;background:#000e;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;";
+
+let slika=document.createElement("img");
+slika.src=e.target.src;
+slika.style.cssText="max-width:95%;max-height:85%;object-fit:contain;";
+
+let dugme=document.createElement("button");
+dugme.textContent="✕";
+dugme.style.cssText="position:absolute;top:15px;right:15px;font-size:25px;background:white;color:black;padding:10px 18px;";
+
+dugme.onclick=()=>okvir.remove();
+okvir.onclick=e=>{
+if(e.target===okvir)okvir.remove();
+};
+
+okvir.append(slika,dugme);
+document.body.appendChild(okvir);
+});
+</script>
+
 </body>
 </html>
 
