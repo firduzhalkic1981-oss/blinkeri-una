@@ -580,44 +580,96 @@ box.appendChild(d);
 });
 }
 
+
 function showCart(){
 
 let box=document.getElementById("cart");
 box.innerHTML="";
 
 let total=0;
+let grupe={};
 
-if(!cart.length){
+cart.forEach(item=>{
+let key=item.i+"-"+item.dekor;
+
+if(!grupe[key]){
+grupe[key]={
+i:item.i,
+dekor:item.dekor,
+kolicina:0
+};
+}
+
+grupe[key].kolicina++;
+});
+
+if(cart.length===0){
 box.textContent="Korpa je prazna.";
 }
 
-cart.forEach((item,n)=>{
+Object.values(grupe).forEach(g=>{
 
-let x=p[item.i];
-total+=x[3];
+let x=p[g.i];
+let iznos=x[3]*g.kolicina;
+total+=iznos;
 
-let row=document.createElement("p");
+let row=document.createElement("div");
+row.style.cssText=
+"padding:12px 0;border-bottom:1px solid #ccc;";
 
-row.textContent=
+let tekst=document.createElement("p");
+tekst.textContent=
 x[0]+" — "+x[1]+" — "+x[2]+
-" — DEKOR BR. "+item.dekor+
-" — "+x[3]+" KM ";
+" — DEKOR BR. "+g.dekor;
 
-let b=document.createElement("button");
-b.textContent="Ukloni";
+let cijena=document.createElement("p");
+cijena.textContent=
+g.kolicina+" kom. × "+x[3]+" KM = "+iznos+" KM";
 
-b.onclick=()=>{
-cart.splice(n,1);
+let minus=document.createElement("button");
+minus.textContent="−";
+
+minus.onclick=()=>{
+let index=cart.findIndex(item=>
+item.i===g.i&&item.dekor===g.dekor
+);
+if(index!==-1)cart.splice(index,1);
 showCart();
 };
 
-row.appendChild(b);
+let kolicina=document.createElement("strong");
+kolicina.textContent="  "+g.kolicina+"  ";
+
+let plus=document.createElement("button");
+plus.textContent="+";
+
+plus.onclick=()=>{
+cart.push({i:g.i,dekor:g.dekor});
+showCart();
+};
+
+let ukloni=document.createElement("button");
+ukloni.textContent=" Ukloni ";
+
+ukloni.onclick=()=>{
+cart=cart.filter(item=>
+!(item.i===g.i&&item.dekor===g.dekor)
+);
+showCart();
+};
+
+row.append(
+tekst,cijena,minus,kolicina,plus,ukloni
+);
+
 box.appendChild(row);
 
 });
 
 document.getElementById("total").textContent=total;
+
 }
+
 
 function order(){
 
