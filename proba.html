@@ -496,9 +496,11 @@ let box=document.getElementById("products");
 box.innerHTML="";
 
 p.forEach((x,i)=>{
-const q=document.getElementById("productSearch").value.toLowerCase().trim();
-if(q && !(x[0]+" "+x[1]+" "+x[2]).toLowerCase().includes(q))return;
 
+const q=document.getElementById("productSearch").value.toLowerCase().replace(/\s/g,"");
+if(q && !(x[0]+x[1]+x[2]).toLowerCase().replace(/\s/g,"").includes(q))return;
+
+  
 
 if(filter!=="Svi"&&x[0]!==filter)return;
 
