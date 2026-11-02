@@ -333,6 +333,16 @@ Ručno izrađeni metalni blinkeri
 <img src="20260923_192011.jpg" width="300" alt="UNA-D">
 
 <nav id="filters"></nav>
+
+<div style="margin:15px 0;">
+<input
+id="productSearch"
+type="search"
+placeholder="🔍 Traži model, dužinu ili težinu blinkera..."
+oninput="draw()"
+style="width:100%;padding:15px;font-size:16px;border:2px solid #168447;border-radius:10px;">
+</div>
+
 <div class="grid" id="products"></div>
 <section class="cart">
 <h2>🛒 Vaša korpa</h2>
@@ -484,6 +494,9 @@ let box=document.getElementById("products");
 box.innerHTML="";
 
 p.forEach((x,i)=>{
+
+const q=document.getElementById("productSearch").value.toLowerCase().replace(/\s/g,"");
+if(q && !(x[0]+" "+x[1]+" "+x[2]).toLowerCase().replace(/\s/g,"").includes(q))return;
 
 if(filter!=="Svi"&&x[0]!==filter)return;
 
